@@ -19,8 +19,8 @@ const Card = ({ desc, onDeleteClick, onEditClick, title }: CardProps) => {
         </div>
       </div>
       <div className="btns-wrapper">
-        <Button label="Edit" />
-        <Button label="Delete" isSecondary />
+        <Button label="Edit" onClick={onEditClick} />
+        <Button label="Delete" isSecondary onClick={onDeleteClick} />
       </div>
     </div>
   );
