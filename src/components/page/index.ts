@@ -1,3 +1,3 @@
 import Streams from "./Streams";
-
-export { Streams };
+import EditScreen from "./EditScreen";
+export { Streams, EditScreen };
