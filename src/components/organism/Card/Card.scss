@@ -3,8 +3,12 @@
   padding: 4px;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid #cacaca;
-  border-width: 1px 0 1px 0;
+  &:nth-child(n) {
+    border-top: 1px solid #cacaca;
+  }
+  &:last-child {
+    border-bottom: 1px solid #cacaca;
+  }
   .info-wrapper {
     display: flex;
     align-items: center;
