@@ -1,29 +1,50 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback } from "react";
 import { IObjData } from "../../../shared/Types";
 import { Button } from "../../atom";
 import { Card } from "../../organism";
 import "./Streams.scss";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { deleteStream } from "../../../redux/actions/stream";
+import { useStreamData } from "../../../redux/store";
 
 const Streams = () => {
-  const [StreamList, setStreamList] = useState<IObjData[]>([]);
+  const StreamList = useStreamData();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-  useEffect(() => {
-    fetch("http://localhost:3005/streams")
-      .then((res) => res.json())
-      .then((data: IObjData[]) => {
-        setStreamList(data);
-      });
-  }, []);
+  const handleEdit = useCallback(
+    (obj: IObjData) => {
+      console.log(obj);
+      history.push(`/edit/${obj.id}`);
+    },
+    [history]
+  );
+
+  const handleDelete = useCallback(
+    (id: string) => {
+      dispatch(deleteStream(id));
+    },
+    [dispatch]
+  );
 
   return (
     <div className="streams-wrapper">
       <div className="screen-label">Streams</div>
       <div className="stream-list">
         {StreamList.map((item) => (
-          <Card desc={item.description} title={item.title} />
+          <Card
+            key={item.id}
+            desc={item.description}
+            title={item.title}
+            onEditClick={() => handleEdit(item)}
+            onDeleteClick={() => handleDelete(item.id)}
+          />
         ))}
       </div>
-      <Button label="Create Stream" />
+      <Link to="/edit">
+        <Button label="Create Stream" />
+      </Link>
     </div>
   );
 };
