@@ -1,10 +1,10 @@
 import { Dispatch } from "redux";
-import { IObjData } from "../../shared/Types";
+import { IStreamData } from "../../shared/Types";
 import * as actions from "./type";
 
 export interface IStreamActions {
   type: actions.actionType;
-  payload: IObjData;
+  payload: IStreamData;
 }
 
 export const addStream =

@@ -1,5 +1,5 @@
 import { Action } from "redux";
-import { IObjData } from "../../shared/Types";
+import { IStreamData } from "../../shared/Types";
 import {
   actionType,
   ADD_STREAM,
@@ -7,7 +7,7 @@ import {
   EDIT_STREAM,
 } from "../actions/type";
 
-const initState: IObjData[] = [
+const initState: IStreamData[] = [
   {
     id: "1",
     title: "Hello World",
@@ -22,10 +22,10 @@ const initState: IObjData[] = [
 
 interface StreamAction extends Action {
   type: actionType;
-  payload?: IObjData;
+  payload?: IStreamData;
 }
 
-function streamReducer(state = initState, action: StreamAction): IObjData[] {
+function streamReducer(state = initState, action: StreamAction): IStreamData[] {
   const { type, payload } = action;
   switch (type) {
     case ADD_STREAM:

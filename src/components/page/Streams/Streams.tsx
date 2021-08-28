@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { IObjData } from "../../../shared/Types";
+import { IStreamData } from "../../../shared/Types";
 import { Button } from "../../atom";
 import { Card } from "../../organism";
 import "./Streams.scss";
@@ -14,7 +14,7 @@ const Streams = () => {
   const history = useHistory();
 
   const handleEdit = useCallback(
-    (obj: IObjData) => {
+    (obj: IStreamData) => {
       console.log(obj);
       history.push(`/edit/${obj.id}`);
     },
