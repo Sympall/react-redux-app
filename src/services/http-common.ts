@@ -1,4 +1,4 @@
-class HttpClass<T> {
+class HttpClass {
   baseUrl: string;
   requestInit: RequestInit = {
     headers: { "Content-type": "application/json" },
@@ -19,18 +19,18 @@ class HttpClass<T> {
       });
   }
 
-  get(relativeUrl: string) {
+  get<T>(relativeUrl: string): Promise<T> {
     return this.fetchApi(relativeUrl, { method: "GET" });
   }
 
-  post(relativeUrl: string, body: T) {
+  post<T>(relativeUrl: string, body: T) {
     return this.fetchApi(relativeUrl, {
       method: "POST",
       body: JSON.stringify(body),
     });
   }
 
-  put(relativeUrl: string, body: T) {
+  put<T>(relativeUrl: string, body: T) {
     return this.fetchApi(relativeUrl, {
       method: "PUT",
       body: JSON.stringify(body),
