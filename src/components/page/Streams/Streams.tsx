@@ -15,14 +15,13 @@ const Streams = () => {
 
   const handleEdit = useCallback(
     (obj: IStreamData) => {
-      console.log(obj);
       history.push(`/edit/${obj.id}`);
     },
     [history]
   );
 
   const handleDelete = useCallback(
-    (id: string) => {
+    (id: number) => {
       dispatch(deleteStream(id));
     },
     [dispatch]

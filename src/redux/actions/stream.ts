@@ -15,7 +15,7 @@ export const addStream =
       const res = await StreamApi.post({
         title,
         description: desc,
-        id: id + "",
+        id: id,
       });
       id++;
       dispatch({
@@ -28,7 +28,7 @@ export const addStream =
   };
 
 export const editStream =
-  (id: string, title: string, desc: string) =>
+  (id: number, title: string, desc: string) =>
   async (dispatch: Dispatch<IStreamActions>) => {
     try {
       const payload = { id, title, description: desc };
@@ -43,7 +43,7 @@ export const editStream =
   };
 
 export const deleteStream =
-  (id: string) => async (dispatch: Dispatch<IStreamActions>) => {
+  (id: number) => async (dispatch: Dispatch<IStreamActions>) => {
     try {
       await StreamApi.remove(id);
       dispatch({
@@ -59,7 +59,9 @@ export const retrieveStreams =
   () => async (dispatch: Dispatch<IStreamActions>) => {
     try {
       const streams = await StreamApi.getAll();
-      id = streams.length + 1;
+      if (streams.length > 0) {
+        id = Number(streams.slice(-1)[0].id) + 1;
+      }
       dispatch({
         type: actions.INIT_STREAM,
         payload: streams,

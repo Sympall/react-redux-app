@@ -18,8 +18,7 @@ const EditScreen = ({ title }: IEditScreenProps) => {
   const dispatch = useDispatch();
   const Streams = useStreamData();
   const { id } = useParams<EditParams>();
-  const defaultData = Streams.find((item) => item.id === id);
-
+  const defaultData = Streams.find((item) => item.id === parseInt(id));
   const handleSubmit = () => {
     const title = titleInputRef.current?.value ?? "";
     const desc = descInputRef.current?.value ?? "";
