@@ -1,48 +1,53 @@
-import { Action } from "redux";
 import { IStreamData } from "../../shared/Types";
+import { IStreamActions } from "../actions/stream";
 import {
-  actionType,
   ADD_STREAM,
   DELETE_STREAM,
   EDIT_STREAM,
+  INIT_STREAM,
 } from "../actions/type";
 
 const initState: IStreamData[] = [
-  {
-    id: "1",
-    title: "Hello World",
-    description: "Greetings Martians",
-  },
-  {
-    title: "New Movie",
-    description: "Some Set in Mumbai",
-    id: "2",
-  },
+  // {
+  //   id: "1",
+  //   title: "Hello World",
+  //   description: "Greetings Martians",
+  // },
+  // {
+  //   title: "New Movie",
+  //   description: "Some Set in Mumbai",
+  //   id: "2",
+  // },
 ];
 
-interface StreamAction extends Action {
-  type: actionType;
-  payload?: IStreamData;
-}
+// interface IStreamAction extends Action {
+//   type: actionType;
+//   payload?: IStreamData;
+// }
 
-function streamReducer(state = initState, action: StreamAction): IStreamData[] {
+function streamReducer(
+  state = initState,
+  action: IStreamActions
+): IStreamData[] {
   const { type, payload } = action;
   switch (type) {
     case ADD_STREAM:
-      return [...state, payload!];
+      return [...state, (payload as IStreamData)!];
 
     case DELETE_STREAM:
-      return state.filter((item) => item.id !== payload!.id);
+      return state.filter((item) => item.id !== (payload as IStreamData)!.id);
 
     case EDIT_STREAM:
       return state.map((item) => {
-        if (item.id === payload!.id) {
+        if (item.id === (payload as IStreamData)!.id) {
           return {
             ...item,
             ...payload,
           };
         } else return item;
       });
+    case INIT_STREAM:
+      return payload as IStreamData[];
     default:
       return state;
   }

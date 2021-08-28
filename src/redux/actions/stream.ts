@@ -4,9 +4,9 @@ import * as actions from "./type";
 
 export interface IStreamActions {
   type: actions.actionType;
-  payload: IStreamData;
+  payload: IStreamData | IStreamData[];
 }
-
+let id = 0;
 export const addStream =
   (title: string, desc: string) => (dispatch: Dispatch<IStreamActions>) => {
     dispatch({
@@ -33,5 +33,15 @@ export const deleteStream =
     dispatch({
       type: actions.DELETE_STREAM,
       payload: { id, description: "", title: "" },
+    });
+  };
+
+export const retrieveStreams =
+  () => async (dispatch: Dispatch<IStreamActions>) => {
+    const streams = await StreamApi.getAll();
+    id = streams.length + 1;
+    dispatch({
+      type: actions.INIT_STREAM,
+      payload: streams,
     });
   };

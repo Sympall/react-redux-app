@@ -2,7 +2,7 @@ import { IStreamData } from "../shared/Types";
 import { http } from "./http-common";
 
 const getAll = () => {
-  return http.get<IStreamData>("/streams/");
+  return http.get<IStreamData[]>("/streams/");
 };
 
 const post = (data: IStreamData) => {
