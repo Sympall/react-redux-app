@@ -1,4 +1,4 @@
-export class HttpClass<T> {
+class HttpClass<T> {
   baseUrl: string;
   requestInit: RequestInit = {
     headers: { "Content-type": "application/json" },
@@ -43,3 +43,5 @@ export class HttpClass<T> {
     });
   }
 }
+
+export const http = new HttpClass("http://localhost:3005");
