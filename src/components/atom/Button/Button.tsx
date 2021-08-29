@@ -1,7 +1,6 @@
-import React from "react";
 import "./Button.scss";
 
-interface ButtonProps {
+export interface ButtonProps {
   label: string;
   onClick?: () => void;
   isSecondary?: boolean;
@@ -12,6 +11,7 @@ const Button = ({ label, onClick, isSecondary = false }: ButtonProps) => {
     <button
       className={`btn-wrapper ${isSecondary ? "btn-secondary" : ""}`}
       onClick={onClick}
+      data-testid="button-component"
     >
       {label}
     </button>

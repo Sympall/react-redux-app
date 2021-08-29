@@ -1,7 +1,7 @@
 import "./Card.scss";
 import { Button } from "../../atom";
 
-interface CardProps {
+export interface CardProps {
   title: string;
   desc: string;
   onEditClick?: () => void;
