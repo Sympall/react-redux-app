@@ -10,15 +10,17 @@ interface IEditScreenProps {
   title: string;
 }
 export interface EditParams {
-  id: string;
+  id?: string;
 }
 const EditScreen = ({ title }: IEditScreenProps) => {
   const titleInputRef = useRef<HTMLInputElement>(null);
   const descInputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
   const Streams = useStreamData();
-  const { id } = useParams<EditParams>();
-  const defaultData = Streams.find((item) => item.id === parseInt(id));
+  const params = useParams<EditParams>();
+  const defaultData = params?.id
+    ? Streams.find((item) => item.id === parseInt(params.id!))
+    : undefined;
   const handleSubmit = () => {
     const title = titleInputRef.current?.value ?? "";
     const desc = descInputRef.current?.value ?? "";

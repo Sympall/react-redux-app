@@ -14,6 +14,7 @@ const Input = (
     <div className="input-wrapper">
       <div className="label">{label}</div>
       <input
+        role="input"
         ref={ref}
         type="text"
         className="input-field"

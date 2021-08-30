@@ -7,20 +7,25 @@ import { createMemoryHistory } from "history";
 
 const middlewares = [thunk];
 const mockStore = configMockStore(middlewares);
-const store = mockStore({ stream: [{ id: 1, desc: "desc", title: "tt" }] });
+export const mockStoreData = [
+  { id: 1, description: "test-desc", title: "test-title" },
+];
+export const store = mockStore({
+  stream: mockStoreData,
+});
+
 store.dispatch = jest.fn();
 
-export const render = (comp: any) => {
+export const renderWithRouter = (comp: any) => {
   const history = createMemoryHistory();
   return RTL(
     <Provider store={store}>
-      <Router history={history}>
-        <Switch>
-          <Route path="/edit/:id" component={() => <div>test edit</div>} />
-          <Route path="/">{comp}</Route>
-        </Switch>
-        {/* {comp} */}
-      </Router>
+      <Router history={history}>{comp}</Router>
     </Provider>
   );
+};
+
+export const render = (comp: any) => {
+  // const history = createMemoryHistory();
+  return RTL(<Provider store={store}>{comp}</Provider>);
 };
