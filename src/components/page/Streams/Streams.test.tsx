@@ -1,37 +1,11 @@
 import Streams from "./Streams";
-import { render as RTL, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
-import configMockStore from "redux-mock-store";
-import thunk from "redux-thunk";
-import { Router, Switch, Route } from "react-router-dom";
-import { createMemoryHistory } from "history";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { deleteStream } from "../../../redux/actions/stream";
-
+import { render } from "../../../shared/utils/test-utils";
 // jest.mock("../../../redux/store", () => ({
 //   ...jest.requireActual("../../../redux/store"),
 //   useStreamData: jest.fn().mockReturnValue([]),
 // }));
-
-const middlewares = [thunk];
-const mockStore = configMockStore(middlewares);
-const store = mockStore({ stream: [{ id: 1, desc: "desc", title: "tt" }] });
-store.dispatch = jest.fn();
-
-const render = (comp: any) => {
-  const history = createMemoryHistory();
-  return RTL(
-    <Provider store={store}>
-      <Router history={history}>
-        <Switch>
-          <Route path="/edit/:id" component={() => <div>test edit</div>} />
-          <Route path="/">{comp}</Route>
-        </Switch>
-        {/* {comp} */}
-      </Router>
-    </Provider>
-  );
-};
 
 describe("Stream page", () => {
   it("render list", () => {
