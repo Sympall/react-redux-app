@@ -30,7 +30,7 @@ const Streams = () => {
   return (
     <div className="streams-wrapper">
       <div className="screen-label">Streams</div>
-      <div className="stream-list">
+      <div className="stream-list" data-testid="stream-list">
         {StreamList.map((item) => (
           <Card
             key={item.id}
